@@ -25,7 +25,7 @@ This is a humorous, anime-styled GUI built with Python and Tkinter for simulatin
 
 Install required packages:
 
-```bash
+```
 pip install pillow requests
 ```
 
@@ -36,18 +36,18 @@ pip install pillow requests
 ### 🪟 Windows
 
 1. Clone the repo:
-   ```bash
+   ```
    git clone https://github.com/yourusername/meme-seed-gui.git
    cd meme-seed-gui
    ```
 
 2. Run the script:
-   ```bash
+   ```
    python main.py
    ```
 
 3. To compile into an `.exe`:
-   ```bash
+   ```
    pip install pyinstaller
    pyinstaller --onefile --windowed main.py
    ```
@@ -59,14 +59,14 @@ pip install pillow requests
 ### 🐧 Linux
 
 1. Clone and install dependencies:
-   ```bash
+   ```
    git clone https://github.com/yourusername/meme-seed-gui.git
    cd meme-seed-gui
    pip install pillow requests
    ```
 
 2. Run the script:
-   ```bash
+   ```
    python3 main.py
    ```
 
@@ -75,19 +75,19 @@ pip install pillow requests
 ### 🍎 macOS
 
 1. Clone and install dependencies:
-   ```bash
+   ```
    git clone https://github.com/yourusername/meme-seed-gui.git
    cd meme-seed-gui
    pip3 install pillow requests
    ```
 
 2. Run the script:
-   ```bash
+   ```
    python3 main.py
    ```
 
 3. To create a macOS app:
-   ```bash
+   ```
    pip install py2app
    python3 setup.py py2app
    ```
@@ -104,9 +104,9 @@ Make sure your AWS server is set up to receive `POST` requests at:
 https://your-server-url.com/report
 ```
 
-Expected JSON payload:
+Expected  payload:
 
-```json
+```
 {
   "seed_words": ["word1", "word2", ..., "extra"],
   "source": "phishing_simulation_gui"
