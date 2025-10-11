@@ -1,6 +1,9 @@
 
 # LOLBAS .lnk Generator
 
+![App Screenshot](https://raw.githubusercontent.com/s-b-repo/ps1ware/main/lolbas-lnk-gen/image.png)
+
+
 This is a Python-based GUI tool that generates `.lnk` (Windows shortcut) files using various https://lolbas-project.github.io/ execution methods. It allows users to specify a payload URL and customize execution behavior with stealth mode, delay, decoy commands, and task scheduling.
 
 ---
