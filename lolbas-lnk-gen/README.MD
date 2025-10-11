@@ -36,8 +36,8 @@ This is a Python-based GUI tool that generates `.lnk` (Windows shortcut) files u
 1. **Clone the repository**:
 
    ```
-   git clone https://github.com/yourusername/lolbas-lnk-generator.git
-   cd lolbas-lnk-generator
+   git clone https://github.com/s-b-repo/ps1ware.git
+   cd ps1ware
    ```
 
 2. **Install dependencies**:
