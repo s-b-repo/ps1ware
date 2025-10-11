@@ -7,8 +7,7 @@ set START_PORT=1
 set END_PORT=65535
 
 REM Setting up Discord webhook URL
-set WEBHOOK_URL=https://discord.com/api/webhooks/1244376223606640640/Wi1hxRB1i9Fr3s-3lNVJBhI6_pEaa_j1Enjzy1Xt0wHTxi5bw3V3odXDv2Ffe_0LRxsP
-
+set WEBHOOK_URL=https://discord.com/api/webhooks/1401553505919045683/AR-lPaj90tB6gt9aanhyX36PFMhSBuzquFBmHwGSG__Nw4gd86IQGgTkUPIzQSyj41x5
 :LOOP
 for /L %%P in (%START_PORT%,1,%END_PORT%) do (
     echo Testing port %%P...
